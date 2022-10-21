@@ -20,6 +20,8 @@ namespace Infrastructure
         }
 
         public DbSet<CategoryEntity> Categories { get; set; }
+        //ListNews
+        public DbSet<PostEntity> Posts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

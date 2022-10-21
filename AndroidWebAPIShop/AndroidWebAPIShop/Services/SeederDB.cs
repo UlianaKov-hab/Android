@@ -1,5 +1,7 @@
 ﻿using AndroidWebAPIShop.Constants;
+using ApplicationCore.Entities;
 using ApplicationCore.Entities.Identity;
+using Infrastructure;
 using Microsoft.AspNetCore.Identity;
 
 namespace AndroidWebAPIShop.Services
@@ -11,6 +13,9 @@ namespace AndroidWebAPIShop.Services
             using (var scope = app.ApplicationServices
                 .GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
+                var context = scope.ServiceProvider
+                    .GetRequiredService<ShopEFContext>();
+
                 var userManager = scope.ServiceProvider
                     .GetRequiredService<UserManager<AppUser>>();
 
@@ -28,6 +33,48 @@ namespace AndroidWebAPIShop.Services
                         Name = Roles.Admin
                     }).Result;
                 }
+                if (!userManager.Users.Any())
+                {
+                    AppUser user = new AppUser
+                    {
+                        FirstName = "Петро",
+                        SecondName = "Мельник",
+                        Photo = "user.jpg",
+                        Email = "user@gmail.com",
+                        UserName = "user@gmail.com"
+                    };
+                    var result = userManager.CreateAsync(user, "Qwerty1-").Result;
+                    result = userManager.AddToRoleAsync(user, Roles.User).Result;
+
+                    AppUser admin = new AppUser
+                    {
+                        FirstName = "Олег",
+                        SecondName = "Коваль",
+                        Photo = "admin.jpg",
+                        Email = "admin@gmail.com",
+                        UserName = "admin@gmail.com"
+                    };
+                    result = userManager.CreateAsync(admin, "Qwerty1-+").Result;
+                    result = userManager.AddToRoleAsync(admin, Roles.Admin).Result;
+                }
+                if (!context.Posts.Any())
+                {
+                    var user = userManager.FindByEmailAsync("admin@gmail.com").Result;
+                    if(user != null)
+                    {
+                        var post = new PostEntity
+                        {
+                            //дата адаптується під регіон
+                            DateCreated = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc),
+                            Title = "Гей парад розігнали",
+                            UserCreateId = user.Id,
+                            Description = "Під охороною. Реакція суспільства не однозначна"
+                        };
+                        context.Posts.Add(post);
+                        context.SaveChanges();
+                    }
+                }
+
             }
         }
     }
