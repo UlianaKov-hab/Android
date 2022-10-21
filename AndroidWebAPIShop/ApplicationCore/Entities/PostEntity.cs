@@ -19,6 +19,7 @@ namespace ApplicationCore.Entities
         [ForeignKey("UserCreate")]
         public long UserCreateId { get; set; }
         public virtual AppUser UserCreate { get; set; }
+        public virtual ICollection<UserPostSelect> UserPostSelects { get; set; }
 
     }
 }

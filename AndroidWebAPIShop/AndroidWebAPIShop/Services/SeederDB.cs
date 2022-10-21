@@ -72,8 +72,16 @@ namespace AndroidWebAPIShop.Services
                         };
                         context.Posts.Add(post);
                         context.SaveChanges();
+                        var postSelect = new UserPostSelect
+                        {
+                            UserId = user.Id,
+                            PostId = post.Id,
+                        };
+                        context.UserPostSelects.Add(postSelect);
+                        context.SaveChanges();
                     }
                 }
+
 
             }
         }

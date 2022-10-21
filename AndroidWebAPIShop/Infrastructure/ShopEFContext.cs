@@ -23,6 +23,8 @@ namespace Infrastructure
         //ListNews
         public DbSet<PostEntity> Posts { get; set; }
 
+        public DbSet<UserPostSelect> UserPostSelects { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -40,7 +42,13 @@ namespace Infrastructure
                     .HasForeignKey(r => r.UserId)
                     .IsRequired();
             });
+
+            builder.Entity<UserPostSelect>(userPostSelect =>
+            {
+                userPostSelect.HasKey(ur => new { ur.UserId, ur.PostId });
+            });
             //builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
         }
 
 
