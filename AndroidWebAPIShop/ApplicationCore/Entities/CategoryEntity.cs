@@ -18,6 +18,7 @@ namespace ApplicationCore.Entities
         public int Priority { get; set; }
         [StringLength(4000)]
         public string Description { get; set; }
+        public virtual ICollection<ProductEntity> Products { get; set; }
 
     }
 }

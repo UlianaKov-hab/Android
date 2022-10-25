@@ -25,6 +25,9 @@ namespace Infrastructure
 
         public DbSet<UserPostSelect> UserPostSelects { get; set; }
 
+        public DbSet<ProductEntity> Products { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

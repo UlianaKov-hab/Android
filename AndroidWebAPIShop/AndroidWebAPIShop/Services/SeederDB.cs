@@ -3,6 +3,7 @@ using ApplicationCore.Entities;
 using ApplicationCore.Entities.Identity;
 using Infrastructure;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace AndroidWebAPIShop.Services
 {
@@ -15,6 +16,8 @@ namespace AndroidWebAPIShop.Services
             {
                 var context = scope.ServiceProvider
                     .GetRequiredService<ShopEFContext>();
+                
+                context.Database.Migrate();  ///автоматично накатує міграції якщо їх немає.
 
                 var userManager = scope.ServiceProvider
                     .GetRequiredService<UserManager<AppUser>>();
@@ -81,7 +84,11 @@ namespace AndroidWebAPIShop.Services
                         context.SaveChanges();
                     }
                 }
-
+                if(!context.Products.Any())
+                {
+                    ProductEntity productEntity;
+                }
+               
 
             }
         }
