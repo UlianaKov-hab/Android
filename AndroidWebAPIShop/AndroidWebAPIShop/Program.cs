@@ -1,3 +1,4 @@
+using AndroidWebAPIShop.Mapper;
 using AndroidWebAPIShop.Services;
 using ApplicationCore.Entities.Identity;
 using Infrastructure;
@@ -25,8 +26,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(AppMapProfile));
+
 
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

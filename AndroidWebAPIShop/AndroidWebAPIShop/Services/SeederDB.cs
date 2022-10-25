@@ -84,9 +84,18 @@ namespace AndroidWebAPIShop.Services
                         context.SaveChanges();
                     }
                 }
-                if(!context.Products.Any())
+                if(!context.Categories.Any())
                 {
-                    ProductEntity productEntity;
+                    var category = new CategoryEntity
+                    {
+                        Name = "Комп'ютери та ноутбуки",
+                        DateCreated = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc),
+                        Image = "laptop.jpeg",
+                        Priority = 1,
+                        Description = "Ноутбуки і ПК для кожного"
+                    };
+                    context.Categories.Add(category);
+                    context.SaveChanges();
                 }
                
 
