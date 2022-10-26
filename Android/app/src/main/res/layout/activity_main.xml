@@ -9,11 +9,23 @@
 
     <ImageView
         android:id="@+id/ivGirl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginTop="128dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/imageButton"
+        android:layout_width="219dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="16dp"
+        android:onClick="myClickImage"
+        android:text="Привіт"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivGirl" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
