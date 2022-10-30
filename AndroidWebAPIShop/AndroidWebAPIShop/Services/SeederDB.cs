@@ -97,7 +97,64 @@ namespace AndroidWebAPIShop.Services
                     context.Categories.Add(category);
                     context.SaveChanges();
                 }
-               
+                if (!context.Products.Any())
+                {
+                    //var category = context.Categories.FirstOrDefaultAsync(c => c.Name == "Комп'ютери та ноутбуки");
+                    CategoryEntity category = context.Categories.FirstOrDefault(c => c.Name == "Комп'ютери та ноутбуки");
+                    if(category != null)
+                    {
+                        ProductImage image = new ProductImage { Name = "laptop.jpeg" };
+                        ProductImage image2 = new ProductImage { Name = "laptop2.jpeg" };
+                        ProductImage image3 = new ProductImage { Name = "laptop3.jpeg" };
+
+                        List<ProductImage> images = new List<ProductImage> { image, image2, image3 };
+                        context.ProductImage.AddRange(images);
+                        context.SaveChanges();
+
+
+                        var product = new ProductEntity
+                        {
+                            Name = "Ноутбук Apple MacBook",
+                            Price = 42999,
+                            Description = "Екран 13.3'' Retina(2560x1600) WQXGA, глянсовий / Apple M1 / RAM 8 ГБ / SSD 256 ГБ / Apple M1 Graphics / Wi - Fi / Bluetooth / macOS Big Sur / 1.29 кг / сірий",
+                            Category = category
+
+                        };
+                        context.Products.Add(product);
+                        context.SaveChanges();
+                        
+
+
+                        //var a = new ProductImageProduct
+                        //{
+                        //    ProductId = product.Id,
+                        //    ProductImagesId = image.Id
+                        //};
+                        //var b = new ProductImageProduct
+                        //{
+                        //    ProductId = product.Id,
+                        //    ProductImagesId = image2.Id
+                        //};
+                        //var c = new ProductImageProduct
+                        //{
+                        //    ProductId = product.Id,
+                        //    ProductImagesId = image2.Id
+                        //};
+
+                        //context.ImageProducts.AddRange(new List<ProductImageProduct> { a, b, c });
+                        //context.SaveChanges();
+
+
+                    }
+
+
+
+
+
+
+
+                }
+
 
             }
         }

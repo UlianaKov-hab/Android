@@ -17,8 +17,10 @@ namespace ApplicationCore.Entities
         public double Price { get; set; }
         [Required, StringLength(4000)]
         public string Description { get; set; }
-        public virtual CategoryEntity Category { get; set; }
 
-       
+        public virtual CategoryEntity Category { get; set; }
+        //public virtual ICollection<ProductImageProduct> ProductImageProducts { get; set; }
+
+
     }
 }

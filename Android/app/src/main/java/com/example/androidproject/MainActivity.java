@@ -1,14 +1,20 @@
 package com.example.androidproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.androidproject.categorycard.CaregoriesAdapter;
 import com.example.androidproject.dto.categories.CategoryItemDTO;
 import com.example.androidproject.service.CategoriesNetwork;
 
@@ -19,23 +25,45 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-
+    CaregoriesAdapter categoriesAdapter;
+    private RecyclerView rcvCategories;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView imageView = (ImageView) findViewById(R.id.ivGirl);
+        rcvCategories = findViewById(R.id.rcvCategories);
+        rcvCategories.setHasFixedSize(true);
+        rcvCategories.setLayoutManager(
+                new GridLayoutManager(this,1, LinearLayoutManager.VERTICAL,false));
 
-        Glide.with(this).load("http://10.0.2.2:5131/images/6_m.jpeg")
-                .apply((new RequestOptions().override(1000)))
-                .into(imageView);
+        requestServer();
+//        ImageView imageView = (ImageView) findViewById(R.id.ivGirl);
+//
+//        Glide.with(this).load("http://10.0.2.2:5131/images/6_m.jpeg")
+//                .apply((new RequestOptions().override(1000)))
+//                .into(imageView);
+
+//        ListView listView = (ListView) findViewById(R.id.myList);
+//        final String[] catNames = new String[] {
+//                "Рыжик", "Барсик", "Мурзик", "Мурка", "Васька",
+//                "Томасина", "Кристина", "Пушок", "Дымка", "Кузя",
+//                "Китти", "Масяня", "Симба"
+//        };
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+//                android.R.layout.simple_list_item_1, catNames);
+//        listView.setAdapter(adapter);
+
+
+
     }
     public void myClickImage(View view)
     {
 //        Toast toast = Toast.makeText(this, "Hello", Toast.LENGTH_LONG);
 //        toast.show();
-        requestServer();
+//        requestServer();
+
+
     }
     private void requestServer() {
         MainActivity instance = this;
@@ -47,8 +75,23 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<List<CategoryItemDTO>> call, Response<List<CategoryItemDTO>> response) {
                         List<CategoryItemDTO> data = response.body();
-                        Toast toast = Toast.makeText(instance, data.get(0).getName(), Toast.LENGTH_LONG);
-                        toast.show();
+
+                        categoriesAdapter = new CaregoriesAdapter(data);
+                        rcvCategories.setAdapter(categoriesAdapter);
+
+//                        Toast toast = Toast.makeText(instance, data.get(0).getName(), Toast.LENGTH_LONG);
+//                        toast.show();
+//                        ListView listView = (ListView) findViewById(R.id.myList);
+//                        String[] stringArray = new String[data.size()];
+//                        int index = 0;
+//                        for (Object value : data) {
+//                            stringArray[index] = (String) value;
+//                            index++;
+//                        }
+//                        data.toArray(stringArray);
+//                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(instance,
+//                               android.R.layout.simple_list_item_1, stringArray);
+//                        listView.setAdapter(adapter);
                     }
 
                     @Override
