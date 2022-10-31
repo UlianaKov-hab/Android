@@ -29,7 +29,7 @@ namespace Infrastructure
 
         public DbSet<ProductImage> ProductImage { get; set; }
 
-        //public DbSet<ProductImageProduct> ImageProducts { get; set; }
+        public DbSet<ProductImageProduct> ImageProducts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -50,18 +50,18 @@ namespace Infrastructure
             });
 
 
-            //builder.Entity<ProductImageProduct>(productImage =>
-            //{
-            //    productImage.HasKey(pi => new { pi.ProductId, pi.ProductImageId });
+            builder.Entity<ProductImageProduct>(productImage =>
+            {
+                productImage.HasKey(pi => new { pi.ProductId, pi.ProductImageId });
 
-            //    productImage.HasOne(pi => pi.Product)
-            //    .WithMany(p => p.ProductImageProducts)
-            //    .HasForeignKey(p => p.ProductId);
+                productImage.HasOne(pi => pi.Product)
+                .WithMany(p => p.ProductImageProducts)
+                .HasForeignKey(p => p.ProductId);
 
-            //    productImage.HasOne(pi => pi.ProductImage)
-            //    .WithMany(p => p.ProductImageProducts)
-            //    .HasForeignKey(p => p.ProductImageId);
-            //});
+                productImage.HasOne(pi => pi.ProductImage)
+                .WithMany(p => p.ProductImageProducts)
+                .HasForeignKey(p => p.ProductImageId);
+            });
 
             builder.Entity<ProductEntity>(product =>
             {

@@ -98,8 +98,7 @@ namespace AndroidWebAPIShop.Services
                     context.SaveChanges();
                 }
                 if (!context.Products.Any())
-                {
-                    //var category = context.Categories.FirstOrDefaultAsync(c => c.Name == "Комп'ютери та ноутбуки");
+                {                    
                     CategoryEntity category = context.Categories.FirstOrDefault(c => c.Name == "Комп'ютери та ноутбуки");
                     if(category != null)
                     {
@@ -122,40 +121,29 @@ namespace AndroidWebAPIShop.Services
                         };
                         context.Products.Add(product);
                         context.SaveChanges();
-                        
 
-
-                        //var a = new ProductImageProduct
-                        //{
-                        //    ProductId = product.Id,
-                        //    ProductImagesId = image.Id
-                        //};
-                        //var b = new ProductImageProduct
-                        //{
-                        //    ProductId = product.Id,
-                        //    ProductImagesId = image2.Id
-                        //};
-                        //var c = new ProductImageProduct
-                        //{
-                        //    ProductId = product.Id,
-                        //    ProductImagesId = image2.Id
-                        //};
-
-                        //context.ImageProducts.AddRange(new List<ProductImageProduct> { a, b, c });
-                        //context.SaveChanges();
-
-
+                        ProductImageProduct a = new ProductImageProduct
+                        {
+                            ProductId = product.Id,
+                            ProductImageId = image.Id
+                        };
+                        ProductImageProduct b = new ProductImageProduct
+                        {
+                            ProductId = product.Id,
+                            ProductImageId = image2.Id
+                        };
+                        ProductImageProduct c = new ProductImageProduct
+                        {
+                            ProductId = product.Id,
+                            ProductImageId = image3.Id
+                        };
+                        context.ImageProducts.Add(a);
+                        context.ImageProducts.Add(b);
+                        context.ImageProducts.Add(c);
+                       
+                        context.SaveChanges();
                     }
-
-
-
-
-
-
-
                 }
-
-
             }
         }
     }
