@@ -24,7 +24,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     CaregoriesAdapter categoriesAdapter;
     private RecyclerView rcvCategories;
     @Override
@@ -96,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<List<CategoryItemDTO>> call, Throwable t) {
-
+                    int a = 10;
+                    a = 5;
                     }
                 });
     }
