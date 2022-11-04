@@ -15,10 +15,10 @@ import com.example.androidproject.dto.categories.CategoryItemDTO;
 import com.example.androidproject.R;
 import java.util.List;
 
-public class CaregoriesAdapter extends RecyclerView.Adapter<CategoryCardViewHolder> {
+public class CategoriesAdapter extends RecyclerView.Adapter<CategoryCardViewHolder> {
 
     private List<CategoryItemDTO> categories;
-    public CaregoriesAdapter(List<CategoryItemDTO> categories) { this.categories=categories; }
+    public CategoriesAdapter(List<CategoryItemDTO> categories) { this.categories=categories; }
     @NonNull
     @Override
     public CategoryCardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

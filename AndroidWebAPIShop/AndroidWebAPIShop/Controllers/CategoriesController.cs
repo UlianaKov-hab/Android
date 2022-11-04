@@ -1,4 +1,6 @@
-﻿using AndroidWebAPIShop.Models;
+﻿using AndroidWebAPIShop.Helpers;
+using AndroidWebAPIShop.Models;
+using ApplicationCore.Entities;
 using AutoMapper;
 using Infrastructure;
 using Microsoft.AspNetCore.Http;
@@ -27,6 +29,25 @@ namespace AndroidWebAPIShop.Controllers
                 .ToList();
 
             return Ok(model);
+        }
+
+        [HttpPost]
+        [Route("create")]
+        public async Task<IActionResult> Create(CategoryCreateModel model)
+        {
+            try
+            {
+                var category = _mapper.Map<CategoryEntity>(model);
+                category.Image = ImageWorker.SaveImage(model.Image);
+                await _contect.Categories.AddAsync(category);
+                await _contect.SaveChangesAsync();
+
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            return Ok();
         }
     }
 }

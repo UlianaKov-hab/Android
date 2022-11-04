@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.androidproject.common.ChangeImageActivity;
+import com.example.androidproject.common.CreateCategoryActivity;
 
 public class BaseActivity extends AppCompatActivity {
     @Override
@@ -35,6 +36,16 @@ public class BaseActivity extends AppCompatActivity {
             case R.id.m_changeimage:
                 try {
                     intent = new Intent(BaseActivity.this, ChangeImageActivity.class);
+                    startActivity(intent);
+                    finish();
+                } catch (Exception ex) {
+                    System.out.println("Problem " + ex.getMessage());
+                }
+                return true;
+
+            case R.id.m_create_category:
+                try {
+                    intent = new Intent(BaseActivity.this, CreateCategoryActivity.class);
                     startActivity(intent);
                     finish();
                 } catch (Exception ex) {
