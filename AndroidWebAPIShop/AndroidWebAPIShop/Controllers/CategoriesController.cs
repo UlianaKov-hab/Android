@@ -23,7 +23,7 @@ namespace AndroidWebAPIShop.Controllers
 
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         [Route("list")]
         public async Task<IActionResult> Index()
         {

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.androidproject.BaseActivity;
+import com.example.androidproject.MainActivity;
 import com.example.androidproject.R;
 import com.example.androidproject.catalog.CatalogActivity;
 import com.example.androidproject.dto.categories.CategoryCreateDTO;
@@ -47,7 +48,7 @@ public class CreateCategoryActivity extends BaseActivity {
 //        CommonUtils.showLoading();
         CategoryCreateDTO categoryCreateDTO=new CategoryCreateDTO();
         categoryCreateDTO.setName(txtCategoryName.getText().toString());
-        categoryCreateDTO.setImageBase64(uriGetBase64(uri));
+        categoryCreateDTO.setImage(uriGetBase64(uri));
         CategoriesNetwork
                 .getInstance()
                 .getJSONApi()
@@ -57,7 +58,7 @@ public class CreateCategoryActivity extends BaseActivity {
                     public void onResponse(Call<Void> call, Response<Void> response) {
 //                        CommonUtils.hideLoading();
                         //створюємо намір запуску activity CatalogActivity
-                        Intent intent = new Intent(CreateCategoryActivity.this, CatalogActivity.class);
+                        Intent intent = new Intent(CreateCategoryActivity.this, MainActivity.class);
 
                         startActivity(intent); //запускаємо CatalogActivity
                         finish();

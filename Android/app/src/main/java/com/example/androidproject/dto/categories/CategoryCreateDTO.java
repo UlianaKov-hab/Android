@@ -3,7 +3,7 @@ package com.example.androidproject.dto.categories;
 public class CategoryCreateDTO {
 
     public String name;
-    public String imageBase64;
+    public String image;
     public int priority;
     public String description;
 
@@ -15,12 +15,12 @@ public class CategoryCreateDTO {
         this.name = name;
     }
 
-    public String getImageBase64() {
-        return imageBase64;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageBase64(String imageBase64) {
-        this.imageBase64 = imageBase64;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public int getPriority() {
