@@ -3,6 +3,7 @@ using AndroidWebAPIShop.Models;
 using ApplicationCore.Entities;
 using AutoMapper;
 using Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,19 +21,21 @@ namespace AndroidWebAPIShop.Controllers
             _mapper = mapper;
         }
 
+
         [HttpGet]
+        [Authorize]
         [Route("list")]
         public async Task<IActionResult> Index()
         {
             var model = _contect.Categories
                 .Select(x => _mapper.Map<CategoryItemModel>(x))
                 .ToList();
-
             return Ok(model);
         }
 
+        
         [HttpPost]
-        [Route("create")]
+        [Route("create")]        
         public async Task<IActionResult> Create(CategoryCreateModel model)
         {
             try
