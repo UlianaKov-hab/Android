@@ -58,7 +58,7 @@ public class CreateCategoryActivity extends BaseActivity {
                     public void onResponse(Call<Void> call, Response<Void> response) {
 //                        CommonUtils.hideLoading();
                         //створюємо намір запуску activity CatalogActivity
-                        Intent intent = new Intent(CreateCategoryActivity.this, MainActivity.class);
+                        Intent intent = new Intent(CreateCategoryActivity.this, CatalogActivity.class);
 
                         startActivity(intent); //запускаємо CatalogActivity
                         finish();
@@ -109,8 +109,6 @@ public class CreateCategoryActivity extends BaseActivity {
             //String base64 = data.getStringExtra("base64");
             uri = (Uri) data.getParcelableExtra("croppedUri");
             IVPreviewImage.setImageURI(uri);
-            int a = 12;
-            a = 16;
         }
     }
 

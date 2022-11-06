@@ -6,6 +6,11 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/m_login"
+        android:title="Увійти"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/m_changeimage"
         android:title="Вибір фото"
         app:showAsAction="never" />

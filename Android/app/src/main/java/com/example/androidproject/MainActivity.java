@@ -89,8 +89,7 @@ public class MainActivity extends BaseActivity {
 
                     @Override
                     public void onFailure(Call<List<CategoryItemDTO>> call, Throwable t) {
-                    int a = 10;
-                    a = 5;
+
                     }
                 });
     }

@@ -38,7 +38,7 @@ public class CatalogActivity extends BaseActivity {
     }
     private void requestServer()
     {
-        CommonUtils.showLoading();
+//        CommonUtils.showLoading();
         CategoriesNetwork
                 .getInstance()
                 .getJSONApi()
@@ -49,7 +49,7 @@ public class CatalogActivity extends BaseActivity {
                         List<CategoryItemDTO> data = response.body();
                         categoriesAdapter = new CategoriesAdapter(data);
                         rcvCategories.setAdapter(categoriesAdapter);
-                        CommonUtils.hideLoading();
+//                        CommonUtils.hideLoading();
                     }
 
                     @Override

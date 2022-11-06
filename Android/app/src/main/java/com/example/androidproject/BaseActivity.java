@@ -7,6 +7,7 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.androidproject.auth.LoginActivity;
 import com.example.androidproject.common.ChangeImageActivity;
 import com.example.androidproject.common.CreateCategoryActivity;
 
@@ -46,6 +47,16 @@ public class BaseActivity extends AppCompatActivity {
             case R.id.m_create_category:
                 try {
                     intent = new Intent(BaseActivity.this, CreateCategoryActivity.class);
+                    startActivity(intent);
+                    finish();
+                } catch (Exception ex) {
+                    System.out.println("Problem " + ex.getMessage());
+                }
+                return true;
+
+            case R.id.m_login:
+                try {
+                    intent = new Intent(BaseActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 } catch (Exception ex) {
