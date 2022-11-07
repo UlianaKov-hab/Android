@@ -7,7 +7,8 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.androidproject.auth.LoginActivity;
+import com.example.androidproject.account.LoginActivity;
+import com.example.androidproject.application.HomeApplication;
 import com.example.androidproject.common.ChangeImageActivity;
 import com.example.androidproject.common.CreateCategoryActivity;
 
@@ -17,6 +18,8 @@ public class BaseActivity extends AppCompatActivity {
     {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
+        menu.setGroupVisible(R.id.group_anonimus, !HomeApplication.getInstance().isAuth());
+        menu.setGroupVisible(R.id.group_auth, HomeApplication.getInstance().isAuth());
         return true;
     }
     @Override
@@ -61,6 +64,18 @@ public class BaseActivity extends AppCompatActivity {
                     finish();
                 } catch (Exception ex) {
                     System.out.println("Problem " + ex.getMessage());
+                }
+                return true;
+
+            case R.id.m_logout:
+                try {
+                    HomeApplication.getInstance().deleteToken();
+                    intent = new Intent(BaseActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                catch(Exception ex) {
+                    System.out.println("Problem "+ ex.getMessage());
                 }
                 return true;
             default:

@@ -1,6 +1,6 @@
-package com.example.androidproject.dto.users;
+package com.example.androidproject.account.dto;
 
-public class UserLoginDTO {
+public class LoginDTO {
     public String email;
     public String password;
 

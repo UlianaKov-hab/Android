@@ -5,18 +5,32 @@
         android:title="Головна"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/m_login"
-        android:title="Увійти"
-        app:showAsAction="never" />
+    <group android:id="@+id/group_anonimus"
+        android:visible="true">
+        <item
+            android:id="@+id/m_login"
+            android:title="Вхід"
+            app:showAsAction="never" />
+    </group>
+
+    <group
+        android:id="@+id/group_auth"
+        android:visible="false">
+        <item
+            android:id="@+id/m_logout"
+            android:title="Вихід"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/m_create_category"
+            android:title="Додати категорію"
+            app:showAsAction="never" />
+    </group>
 
     <item
         android:id="@+id/m_changeimage"
         android:title="Вибір фото"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/m_create_category"
-        android:title="Додати категорію"
-        app:showAsAction="never" />
+
 </menu>
