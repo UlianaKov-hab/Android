@@ -41,6 +41,7 @@ namespace AndroidWebAPIShop.Controllers
         {
             try
             {
+                string userName = User.Identity.Name; //дозволить нам доступитись до користувача, який створив категорію
                 var category = _mapper.Map<CategoryEntity>(model);
                 category.Image = ImageWorker.SaveImage(model.Image);
                 await _contect.Categories.AddAsync(category);
