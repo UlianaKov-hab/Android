@@ -16,8 +16,6 @@ import com.example.androidproject.account.dto.ValidationRegisterDTO;
 import com.example.androidproject.account.network.AccountService;
 import com.example.androidproject.application.HomeApplication;
 import com.example.androidproject.application.JwtSecurityService;
-import com.example.androidproject.network.users.LoginResponse;
-import com.example.androidproject.service.UsersNetwork;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;

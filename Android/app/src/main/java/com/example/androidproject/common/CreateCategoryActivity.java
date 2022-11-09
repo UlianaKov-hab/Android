@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.widget.Toast;
 
 import com.example.androidproject.utils.CommonUtils;
 
@@ -58,10 +59,18 @@ public class CreateCategoryActivity extends BaseActivity {
                     public void onResponse(Call<Void> call, Response<Void> response) {
 //                        CommonUtils.hideLoading();
                         //створюємо намір запуску activity CatalogActivity
-                        Intent intent = new Intent(CreateCategoryActivity.this, CatalogActivity.class);
+                        if(response.isSuccessful())
+                        {
+                            Intent intent = new Intent(CreateCategoryActivity.this, CatalogActivity.class);
 
-                        startActivity(intent); //запускаємо CatalogActivity
-                        finish();
+                            startActivity(intent); //запускаємо CatalogActivity
+                            finish();
+                        }
+                        else{
+                            int code = response.code();
+                            Toast.makeText(CreateCategoryActivity.this,"Problem "+ code, Toast.LENGTH_LONG).show();
+                        }
+
                     }
 
                     @Override
