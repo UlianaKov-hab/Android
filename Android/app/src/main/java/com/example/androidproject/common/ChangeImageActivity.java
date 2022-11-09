@@ -50,6 +50,10 @@ public class ChangeImageActivity extends BaseActivity {
 //                    .initialize(this);
 //            CommonUtils.hideLoading();
         }
+        else{
+            //якщо натиснули кнопку назад, то викидає
+            this.finish();
+        }
     }
     public void RotateRightImage(View view) {
         //CropView cropView = (CropView) findViewById(R.id.cropView);
