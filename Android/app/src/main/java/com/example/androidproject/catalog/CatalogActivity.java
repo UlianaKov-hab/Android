@@ -1,13 +1,17 @@
 package com.example.androidproject.catalog;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidproject.BaseActivity;
+import com.example.androidproject.CategoryItemActivity;
 import com.example.androidproject.R;
+import com.example.androidproject.application.HomeApplication;
 import com.example.androidproject.categorycard.CategoriesAdapter;
 import com.example.androidproject.dto.categories.CategoryItemDTO;
 import com.example.androidproject.service.CategoriesNetwork;
@@ -46,10 +50,13 @@ public class CatalogActivity extends BaseActivity {
                 .enqueue(new Callback<List<CategoryItemDTO>>() {
                     @Override
                     public void onResponse(Call<List<CategoryItemDTO>> call, Response<List<CategoryItemDTO>> response) {
-                        List<CategoryItemDTO> data = response.body();
-                        categoriesAdapter = new CategoriesAdapter(data);
-                        rcvCategories.setAdapter(categoriesAdapter);
+                        if(response.isSuccessful()){
+                            List<CategoryItemDTO> data = response.body();
+                            categoriesAdapter = new CategoriesAdapter(data, CatalogActivity.this::onClickByItem);
+                            rcvCategories.setAdapter(categoriesAdapter);
 //                        CommonUtils.hideLoading();
+                        }
+
                     }
 
                     @Override
@@ -58,4 +65,25 @@ public class CatalogActivity extends BaseActivity {
                     }
                 });
     }
+
+    private void onClickByItem(CategoryItemDTO category) {
+        Toast.makeText(HomeApplication.getAppContext(), category.getName(), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(CatalogActivity.this, CategoryItemActivity.class);
+
+        //передача за допомогою Bundl
+        Bundle b = new Bundle();
+        b.putString("name", category.getName());
+        b.putString("image", category.getImage());
+        intent.putExtras(b); //Put your id to your next Intent
+
+//        intent.putExtra("name", category.getName());
+//        intent.putExtra("image", category.getImage());
+
+
+        startActivity(intent);
+        //finish();
+
+    }
+
+
 }

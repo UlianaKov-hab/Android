@@ -4,9 +4,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
+import com.example.androidproject.application.HomeApplication;
+import com.example.androidproject.catalog.CatalogActivity;
 import com.example.androidproject.categorycard.CategoriesAdapter;
 import com.example.androidproject.dto.categories.CategoryItemDTO;
 import com.example.androidproject.service.CategoriesNetwork;
@@ -69,7 +73,7 @@ public class MainActivity extends BaseActivity {
                     public void onResponse(Call<List<CategoryItemDTO>> call, Response<List<CategoryItemDTO>> response) {
                         List<CategoryItemDTO> data = response.body();
 
-                        categoriesAdapter = new CategoriesAdapter(data);
+                        categoriesAdapter = new CategoriesAdapter(data, MainActivity.this::onClickByItem);
                         rcvCategories.setAdapter(categoriesAdapter);
 
 //                        Toast toast = Toast.makeText(instance, data.get(0).getName(), Toast.LENGTH_LONG);
@@ -92,6 +96,18 @@ public class MainActivity extends BaseActivity {
 
                     }
                 });
+    }
+    private void onClickByItem(CategoryItemDTO category) {
+        Toast.makeText(HomeApplication.getAppContext(), category.getName(), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(MainActivity.this, CategoryItemActivity.class);
+        //передача за допомогою Bundl
+        Bundle b = new Bundle();
+        b.putString("name", category.getName());
+        b.putString("image", category.getImage());
+        intent.putExtras(b); //Put your id to your next Intent
+        startActivity(intent);
+        //finish();
+
     }
 
 }

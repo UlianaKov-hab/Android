@@ -3,6 +3,7 @@ package com.example.androidproject.categorycard;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,7 +19,13 @@ import java.util.List;
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoryCardViewHolder> {
 
     private List<CategoryItemDTO> categories;
-    public CategoriesAdapter(List<CategoryItemDTO> categories) { this.categories=categories; }
+    private final OnItemClickListener listener;
+
+
+    public CategoriesAdapter(List<CategoryItemDTO> categories, OnItemClickListener listener) {
+        this.categories = categories;
+        this.listener = listener;
+    }
     @NonNull
     @Override
     public CategoryCardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -29,6 +36,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoryCardViewHold
 
     @Override
     public void onBindViewHolder(@NonNull CategoryCardViewHolder holder, int position) {
+
         if(categories!=null&&position<categories.size())
         {
             CategoryItemDTO category = categories.get(position);
@@ -38,6 +46,13 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoryCardViewHold
                     .load(url)
                     .apply(new RequestOptions().override(600))
                     .into(holder.categoryimage);
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClick(category);
+                }
+            });
         }
     }
 
@@ -45,4 +60,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoryCardViewHold
     public int getItemCount() {
         return categories.size();
     }
+
+
 }
